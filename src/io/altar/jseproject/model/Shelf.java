@@ -4,9 +4,9 @@ package io.altar.jseproject.model;
 public class Shelf {
 	
 	private int shelfId = 0;
-	private int capacity = 0;
-	private Product [] productInShelf = new Product[1];
-	private int dailyRentPrice = 0;
+	private int capacity;
+	private Product [] productInShelf;
+	private int dailyRentPrice;
 
 
 	/**
@@ -15,8 +15,7 @@ public class Shelf {
 	 * @param productInShelf
 	 * @param dailyRentPrice
 	 */
-	public Shelf(int shelfId, int capacity, Product productInShelf[], int dailyRentPrice) {
-		this.shelfId = shelfId;
+	public Shelf(int capacity, Product productInShelf[], int dailyRentPrice) {
 		this.capacity = capacity;
 		this.productInShelf = productInShelf;
 		this.dailyRentPrice = dailyRentPrice;

@@ -1,26 +1,30 @@
 package io.altar.jseproject.model;
 
 public class Product {
-	private int productId;
-	private Shelf [] shelfWithProduct = new Shelf[1];
+	private int productId = 0 ;
+	private Shelf [] shelfWithProduct;
 	private int discountValue;
 	private int iva;
-	private float pvp;
+	private int pvp;
+
 
 	/**
-	 * @param productId
+	 * @param productId TIREI DO CONSTRUCTOR
 	 * @param shelfWithProduct
 	 * @param discountValue
 	 * @param iva
 	 * @param pvp
 	 */
-	public Product(int productId, Shelf [] shelfWithProduct, int discountValue, int iva, float pvp) {
-		this.productId = productId;
+	public Product(Shelf [] shelfWithProduct, int discountValue, int iva, int pvp) {
 		this.shelfWithProduct = shelfWithProduct;
 		this.discountValue = discountValue;
 		this.iva = iva;
 		this.pvp = pvp;
 	}
-
+	
+	public void createProduct() {
+		
+	
+	}
 
 }
