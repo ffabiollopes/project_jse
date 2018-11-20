@@ -1,7 +1,9 @@
 package io.altar.jseproject.model;
 
-public class Product extends Entity{
+import java.util.Arrays;
 
+public class Product extends Entity{
+	private Shelf[] shelfWithProduct;
 	private int discountValue;
 	private int iva;
 	private int pvp;
@@ -11,8 +13,8 @@ public class Product extends Entity{
 	 * @param iva
 	 * @param pvp
 	 */
-	public Product(int discountValue, int iva, int pvp) {
-	
+	public Product(Shelf[] shelfWithProduct, int discountValue, int iva, int pvp) {
+		this.shelfWithProduct = shelfWithProduct;
 		this.discountValue = discountValue;
 		this.iva = iva;
 		this.pvp = pvp;
@@ -20,7 +22,9 @@ public class Product extends Entity{
 	/**
 	 * @return the shelfWithProduct
 	 */
-
+	public Shelf[] getShelfWithProduct() {
+		return shelfWithProduct;
+	}
 	/**
 	 * @return the discountValue
 	 */
@@ -63,6 +67,15 @@ public class Product extends Entity{
 	public void setPvp(int pvp) {
 		this.pvp = pvp;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Produto Prateleira = " + Arrays.toString(shelfWithProduct) + ", Valor de desconto = " + discountValue
+				+ ", iva = " + iva + ", pvp = " + pvp;
+	}
+	
 	
 	
 }

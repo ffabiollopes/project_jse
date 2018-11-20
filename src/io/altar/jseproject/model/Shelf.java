@@ -1,5 +1,6 @@
 package io.altar.jseproject.model;
 
+import java.util.Arrays;
 
 public class Shelf extends Entity {
 	
@@ -65,6 +66,16 @@ public class Shelf extends Entity {
 	 */
 	public void setDailyRentPrice(int dailyRentPrice) {
 		this.dailyRentPrice = dailyRentPrice;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Shelf [capacity=" + capacity + ", productInShelf=" + Arrays.toString(productInShelf)
+				+ ", dailyRentPrice=" + dailyRentPrice + "]";
 	}
 	
 	
