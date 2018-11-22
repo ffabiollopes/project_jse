@@ -31,7 +31,7 @@ public class TextInterface {
 	}
 
 	public void menuInicial() {
-		System.out.println("Escolha uma opcao:");
+		System.out.println("Escolha uma opcao:\n");
 		System.out.println("1 - Listar produtos.");
 		System.out.println("2 - Listar prateleiras.");
 		System.out.println("3 - Sair.");
@@ -57,12 +57,12 @@ public class TextInterface {
 	}
 
 	public void menuListarProdutos() {
-		System.out.println("Por favor selecione uma das seguintes opcÌ§oÌƒes:");
+		System.out.println("Por favor selecione uma das seguintes opcoes:\n");
 		System.out.println("1 - Criar Novo produto.");
 		System.out.println("2 - Editar um produto existente.");
 		System.out.println("3 - Consultar o detalhe de um produto.");
 		System.out.println("4 - Remover um produto.");
-		System.out.println("5 - Voltar ao ecraÌƒ anterior.");
+		System.out.println("5 - Voltar ao ecra anterior.");
 		setScreenOption();
 		switch (this.screenOption) {
 		case '1':
@@ -96,14 +96,14 @@ public class TextInterface {
 	}
 
 	public void adicionarProduto() {
-		System.out.println("Criar Novo produto");
+		System.out.println("Criar Novo produto\n");
 		System.out.println("1 - Prateleira onde quer colocar o produto.");
 		int prateleira = sc.nextInt();
-		System.out.println("2 - Valor unitaÌ�rio de desconto.");
+		System.out.println("2 - Valor unitario de desconto.");
 		int desconto = sc.nextInt();
 		System.out.println("3 - IVA (Imposto de Valor Acrescentado em percentagem)");
 		int iva = sc.nextInt();
-		System.out.println("4 - PVP (PrecÌ§o de Venda ao PuÌ�blico)");
+		System.out.println("4 - PVP (Preco de Venda ao Publico)");
 		int pvp = sc.nextInt();
 		System.out.print("Dados do Produto Inserido: ");
 		System.out
@@ -118,37 +118,59 @@ public class TextInterface {
 		
 	System.out.println("Digite o id do produto a alterar");
 	Long id = sc.nextLong();
-//	Product idDoProduto = repositorioDeProducts.findById(id);
-//	System.out.println(idDoProduto);
-	System.out.println();
-	System.out.println("1 - Prateleira onde quer colocar o produto.");
-	int prateleiraProduto = repositorioDeProducts.findById((long)id).getShelfWithProduct();
-	System.out.println(prateleiraProduto);
+	System.out.println(repositorioDeProducts.findById(id));
+
+	System.out.println("\n 1 - Prateleira onde quer colocar o produto.");
+	System.out.println(repositorioDeProducts.findById((long)id).getShelfWithProduct());
 	int prateleira = sc.nextInt();
 	repositorioDeProducts.findById((long)id).setShelfWithProduct(prateleira);
-	System.out.println();
+	
 	
 	System.out.println("2 - Valor unitario de desconto.");
-	int descontoProduto = repositorioDeProducts.findById((long)id).getDiscountValue();
-	System.out.println(descontoProduto);
-	int desconto = sc.nextInt();
-	repositorioDeProducts.findById((long)id).setDiscountValue(desconto);
-	System.out.println();
+	System.out.println(repositorioDeProducts.findById((long)id).getDiscountValue());
+	sc.nextLine();
+	System.out.println("introduza o valor novo ou pressiona enter para manter o Valor");
+	String descontoCheck = sc.nextLine();
+	if(descontoCheck.equals("")){
+        System.out.println("O valor ficou o mesmo");
+	}
+	else {
+		int desconto = Integer.parseInt(descontoCheck);
+		repositorioDeProducts.findById((long)id).setDiscountValue(desconto);
+	}
+	
 	
 	System.out.println("3 - IVA (Imposto de Valor Acrescentado em percentagem)");
-	int ivaProduto = repositorioDeProducts.findById((long)id).getIva();
-	System.out.println(ivaProduto);
-	int iva = sc.nextInt();
-	repositorioDeProducts.findById((long)id).setIva(iva);
-	System.out.println();
+	System.out.println(repositorioDeProducts.findById((long)id).getIva());
+	sc.nextLine();
+	System.out.println("introduza o valor novo ou pressiona enter para manter o Valor");
+	String IvaCheck = sc.nextLine();
+	if(IvaCheck.equals("")){
+        System.out.println("O valor ficou o mesmo");
+	}
+	else {
+		int iva = Integer.parseInt(IvaCheck);
+		repositorioDeProducts.findById((long)id).setIva(iva);
+	}
+
+	
 	
 	System.out.println("4 - PVP (Preco de Venda ao Publico)");
-	int pvpProduto = repositorioDeProducts.findById((long)id).getPvp();
-	System.out.println(pvpProduto);
-	int pvp= sc.nextInt();
-	repositorioDeProducts.findById((long)id).setPvp(pvp);
-	System.out.println();
+	System.out.println(repositorioDeProducts.findById((long)id).getPvp());
+	sc.nextLine();
+	System.out.println("introduza o valor novo ou pressiona enter para manter o Valor");
+	String pvpCheck = sc.nextLine();
+	if(pvpCheck.equals("")){
+        System.out.println("O valor ficou o mesmo");
 	}
+	else {
+		int pvp = Integer.parseInt(pvpCheck);
+		repositorioDeProducts.findById((long)id).setPvp(pvp);
+	}
+	
+	
+	}
+	
 
 	/**
 	 * CONSULTAR PRODUTOS
@@ -160,7 +182,7 @@ public class TextInterface {
 	}
 
 	public void eliminarProduto() {
-		System.out.println("Criar Novo produto");
+		System.out.println("Criar Novo produto\n");
 		System.out.println("Digite o id do produto a eliminar");
 		int id = sc.nextInt();
 		System.out.println("Confirma o produto a eliminar, S/N");
@@ -175,7 +197,7 @@ public class TextInterface {
 
 	public void menuListarPrateleiras() {
 
-		System.out.println("Por favor selecione uma das seguintes opcÌ§oÌƒes:");
+		System.out.println("Por favor selecione uma das seguintes opcoes:\n");
 		System.out.println("1 - Criar nova prateleira.");
 		System.out.println("2 - Editar uma prateleira existente.");
 		System.out.println("3 - Consultar o detalhe de uma prateleira.");
@@ -191,7 +213,7 @@ public class TextInterface {
 			System.out.println("3 - Produto que Alberga.");
 			String produto = sc.next();
 			Integer produtoInt = Integer.parseInt(produto);
-			System.out.println("4 - PrecÌ§o de aluguer de localizacÌ§aÌƒo (diaÌ�rio)");
+			System.out.println("4 - Preco de aluguer de localizacao diario)");
 			String aluguer = sc.next();
 			Integer aluguerInt = Integer.parseInt(aluguer);
 			Shelf shelf = new Shelf(capacidadeInt, produto, aluguerInt);
