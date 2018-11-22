@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Shelf extends Entity {
 	
 	private int capacity;
-	private Product [] productInShelf;
+	private int productInShelf;
 	private int dailyRentPrice;
 
 
@@ -14,7 +14,7 @@ public class Shelf extends Entity {
 	 * @param productInShelf
 	 * @param dailyRentPrice
 	 */
-	public Shelf(int capacity, Product productInShelf[], int dailyRentPrice) {
+	public Shelf(int capacity, int productInShelf, int dailyRentPrice) {
 		this.capacity = capacity;
 		this.productInShelf = productInShelf;
 		this.dailyRentPrice = dailyRentPrice;
@@ -32,7 +32,7 @@ public class Shelf extends Entity {
 	/**
 	 * @return the productInShelf
 	 */
-	public Product[] getProductInShelf() {
+	public int] getProductInShelf() {
 		return productInShelf;
 	}
 
@@ -56,7 +56,7 @@ public class Shelf extends Entity {
 	/**
 	 * @param productInShelf the productInShelf to set
 	 */
-	public void setProductInShelf(Product[] productInShelf) {
+	public void setProductInShelf(int productInShelf) {
 		this.productInShelf = productInShelf;
 	}
 
@@ -69,14 +69,13 @@ public class Shelf extends Entity {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Shelf [capacity=" + capacity + ", productInShelf=" + Arrays.toString(productInShelf)
-				+ ", dailyRentPrice=" + dailyRentPrice + "]";
+		return "Shelf [capacity=" + capacity + ", productInShelf=" + productInShelf + ", dailyRentPrice="
+				+ dailyRentPrice + "]";
 	}
+
+
 	
 	
 

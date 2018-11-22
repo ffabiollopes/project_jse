@@ -17,6 +17,11 @@ public class Entity {
 	public void setId(Long id) {
 		Id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Entity [Id=" + Id + "]";
+	}
 	
 	
 

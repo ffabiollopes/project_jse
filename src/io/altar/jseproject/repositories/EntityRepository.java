@@ -34,8 +34,5 @@ public abstract class EntityRepository<T extends Entity> {
 		return map.values();
 	}
 	
-	public Map<Long, T> getMap(){
-		return map;
-	}
 
 }
