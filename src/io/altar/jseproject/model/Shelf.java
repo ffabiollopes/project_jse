@@ -32,7 +32,7 @@ public class Shelf extends Entity {
 	/**
 	 * @return the productInShelf
 	 */
-	public int] getProductInShelf() {
+	public int getProductInShelf() {
 		return productInShelf;
 	}
 
