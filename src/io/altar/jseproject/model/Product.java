@@ -1,8 +1,11 @@
 package io.altar.jseproject.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Product extends Entity{
+	
 	private int shelfWithProduct;
 	private int discountValue;
 	private int iva;
@@ -74,6 +77,8 @@ public class Product extends Entity{
 		return "Product [shelfWithProduct=" + shelfWithProduct + ", discountValue=" + discountValue + ", iva=" + iva
 				+ ", pvp=" + pvp + "]";
 	}
+	
+	
 	
 	
 	

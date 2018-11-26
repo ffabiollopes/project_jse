@@ -13,12 +13,15 @@ import io.altar.jseproject.repositories.EntityRepository;
 import io.altar.jseproject.repositories.ProductRepository;
 import io.altar.jseproject.repositories.ShelfRepository;
 
-public class TextInterface {
+
+
+ public class TextInterface {
 	//INSTANCIAS --- singleton
 	private static ProductRepository repositorioDeProducts = ProductRepository.getInstance();
 	private static ShelfRepository repositorioDeShelfs = ShelfRepository.getInstance();
 	//SCANNER
 	private char screenOption;
+	
 	Scanner sc = new Scanner(System.in);
 	//METODO SCANNER
 	public void setScreenOption() {
