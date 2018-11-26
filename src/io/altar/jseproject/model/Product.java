@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Product extends Entity{
 	
-	private int shelfWithProduct;
+	private ArrayList <Shelf> shelfWithProduct = new ArrayList<>(); ;
 	private int discountValue;
 	private int iva;
 	private int pvp;
@@ -16,7 +16,7 @@ public class Product extends Entity{
 	 * @param iva
 	 * @param pvp
 	 */
-	public Product(int shelfWithProduct, int discountValue, int iva, int pvp) {
+	public Product(ArrayList <Shelf>  shelfWithProduct, int discountValue, int iva, int pvp) {
 		this.shelfWithProduct = shelfWithProduct;
 		this.discountValue = discountValue;
 		this.iva = iva;
@@ -25,7 +25,7 @@ public class Product extends Entity{
 	/**
 	 * @return the shelfWithProduct
 	 */
-	public int getShelfWithProduct() {
+	public ArrayList getShelfWithProduct() {
 		return shelfWithProduct;
 	}
 	/**
@@ -49,7 +49,7 @@ public class Product extends Entity{
 	/**
 	 * @param shelfWithProduct the shelfWithProduct to set
 	 */
-	public void setShelfWithProduct(int shelfWithProduct) {
+	public void setShelfWithProduct(ArrayList <Shelf>  shelfWithProduct) {
 		this.shelfWithProduct = shelfWithProduct;
 	}
 	/**
