@@ -13,23 +13,23 @@ import io.altar.jseproject.repositories.EntityRepository;
 import io.altar.jseproject.repositories.ProductRepository;
 import io.altar.jseproject.repositories.ShelfRepository;
 
-
-
- public class TextInterface {
-	//INSTANCIAS --- singleton
+public class TextInterface {
+	// INSTANCIAS --- singleton
 	private static ProductRepository repositorioDeProducts = ProductRepository.getInstance();
 	private static ShelfRepository repositorioDeShelfs = ShelfRepository.getInstance();
-	//SCANNER
+	// SCANNER
 	private char screenOption;
-	
+
 	Scanner sc = new Scanner(System.in);
-	//METODO SCANNER
+
+	// METODO SCANNER
 	public void setScreenOption() {
 
 		this.screenOption = sc.next().charAt(0);
 
 	}
-	//MENU INICIAL
+
+	// MENU INICIAL
 	public void menuInicial() {
 		System.out.println("Escolha uma opcao:\n");
 		System.out.println("1 - Listar produtos.");
@@ -55,7 +55,8 @@ import io.altar.jseproject.repositories.ShelfRepository;
 		}
 
 	}
-	//MENU PRODUTOS
+
+	// MENU PRODUTOS
 	public void menuListarProdutos() {
 		System.out.println("Por favor selecione uma das seguintes opcoes:\n");
 		System.out.println("1 - Criar Novo produto.");
@@ -94,27 +95,30 @@ import io.altar.jseproject.repositories.ShelfRepository;
 			break;
 		}
 	}
-	//ADICIONAR PRODUTOS
+
+	// ADICIONAR PRODUTOS
 	public void adicionarProduto() {
 		System.out.println("Criar Novo produto:\n");
-		//colocar um loop a perguntar nova prateleira
+		// colocar um loop a perguntar nova prateleira
 		System.out.println("1 - Prateleira onde quer colocar o produto.");
-		int prateleira = sc.nextInt();
+		Long id = sc.nextLong();
+		repositorioDeShelfs.findById(id);
+		List <Shelf> prateleira;
+		//mudar isto adiconar ao produto
+		prateleira.addShelves(repositorioDeShelfs);
 		System.out.println("2 - Valor unitario de desconto.");
 		int desconto = sc.nextInt();
 		System.out.println("3 - IVA (Imposto de Valor Acrescentado em percentagem)");
 		int iva = sc.nextInt();
 		System.out.println("4 - PVP (Preco de Venda ao Publico)");
 		int pvp = sc.nextInt();
-		System.out.print("Dados do Produto Inserido: ");
-		System.out
-				.println("prateleira:" + prateleira + ", desconto:" + desconto + ", iva:" + iva + ", pvp:" + pvp + ";");
-		Product produto = new Product(prateleira, desconto, iva, pvp);
+		Product produto = new Product(desconto, iva, pvp);
 		repositorioDeProducts.save(produto);
 		System.out.println(repositorioDeProducts.getAll());
 
 	}
-	//MODFICAR PRODUTOS
+
+	// MODFICAR PRODUTOS
 	public void alterarProduto() {
 
 		System.out.println("Digite o id do produto a alterar");
@@ -125,15 +129,17 @@ import io.altar.jseproject.repositories.ShelfRepository;
 		System.out.println("\n 1 - Prateleira onde quer colocar o produto.");
 		System.out.println(repositorioDeProducts.findById((long) id).getShelfWithProduct());
 		sc.nextLine();
-		System.out.println("introduza o valor novo ou pressiona enter para eliminar as prateleiras que albergam o produto");
+		System.out.println(
+				"introduza o valor novo ou pressiona enter para eliminar as prateleiras que albergam o produto");
 		String prateleiraCheck = sc.nextLine();
 		if (prateleiraCheck.equals("")) {
-			//colocar um new shelf list.
-			int a = -1;
-			repositorioDeProducts.findById((long) id).setShelfWithProduct(a);
+			List<Long> shelfWithProduct = new ArrayList<Long>();
+			repositorioDeProducts.findById((long) id).setShelfWithProduct(shelfWithProduct);
 		} else {
-			int prateleira = Integer.parseInt(prateleiraCheck);
-			repositorioDeProducts.findById((long) id).setShelfWithProduct(prateleira);
+			Long prateleira = Long.parseLong(prateleiraCheck);
+			List<Long> shelfWithProduct = new ArrayList<Long>();
+			shelfWithProduct.add(prateleira);
+			repositorioDeProducts.findById((long) id).setShelfWithProduct(shelfWithProduct);
 		}
 
 		// Valor unitario de desconto
@@ -174,13 +180,15 @@ import io.altar.jseproject.repositories.ShelfRepository;
 			repositorioDeProducts.findById((long) id).setPvp(pvp);
 		}
 	}
-	//CONSULTAR PRODUTOS
+
+	// CONSULTAR PRODUTOS
 	public void consultarProduto() {
 		System.out.println("Digite o id do produto a consultar:");
 		int id = sc.nextInt();
 		System.out.println(repositorioDeProducts.findById((long) id));
 	}
-	//ELIMINAR PRODUTOS
+
+	// ELIMINAR PRODUTOS
 	public void eliminarProduto() {
 		System.out.println("Criar Novo produto\n");
 		System.out.println("Digite o id do produto a eliminar");
@@ -194,7 +202,8 @@ import io.altar.jseproject.repositories.ShelfRepository;
 			System.out.println("Nao eliminado");
 		}
 	}
-	//MENU PRATELEIRAS
+
+	// MENU PRATELEIRAS
 	public void menuListarPrateleiras() {
 
 		System.out.println("Por favor selecione uma das seguintes opcoes:\n");
@@ -231,7 +240,8 @@ import io.altar.jseproject.repositories.ShelfRepository;
 			break;
 		}
 	}
-	//ADICIONAR PRATELEIRAS
+
+	// ADICIONAR PRATELEIRAS
 	public void adicionarPrateleiras() {
 
 		System.out.println("Criar Nova  Prateleira\n");
@@ -248,7 +258,8 @@ import io.altar.jseproject.repositories.ShelfRepository;
 		System.out.println(repositorioDeShelfs.getAll());
 
 	}
-	//MODFICAR PRATELEIRAS
+
+	// MODFICAR PRATELEIRAS
 	public void modificarPrateleiras() {
 
 		System.out.println("Digite o id da prateleira a alterar");
@@ -295,14 +306,16 @@ import io.altar.jseproject.repositories.ShelfRepository;
 		}
 
 	}
-	//CONSULTAR PRATELEIRAS
+
+	// CONSULTAR PRATELEIRAS
 	public void consultarPrateleira() {
 		System.out.println("Digite o id da prateleira a consultar:");
 		int id = sc.nextInt();
 		System.out.println(repositorioDeShelfs.findById((long) id));
 
 	}
-	//ELIMINAR PRATELEIRAS
+
+	// ELIMINAR PRATELEIRAS
 	public void eliminarPrateleira() {
 
 		System.out.println("Digite o id da prateleira a eliminar");

@@ -3,37 +3,56 @@ package io.altar.jseproject.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Product extends Entity{
 	
-	private ArrayList <Shelf> shelfWithProduct = new ArrayList<>(); ;
+	private List <Shelf> shelves;
 	private int discountValue;
 	private int iva;
 	private int pvp;
+
+
+
 	/**
-	 * @param shelfWithProduct
+	 * @param shelves
 	 * @param discountValue
 	 * @param iva
 	 * @param pvp
 	 */
-	public Product(ArrayList <Shelf>  shelfWithProduct, int discountValue, int iva, int pvp) {
-		this.shelfWithProduct = shelfWithProduct;
+	public Product( int discountValue, int iva, int pvp) {
+		super();
+		this.shelves = new ArrayList<>();
 		this.discountValue = discountValue;
 		this.iva = iva;
 		this.pvp = pvp;
 	}
+	
+	
 	/**
-	 * @return the shelfWithProduct
+	 * @return the shelves
 	 */
-	public ArrayList getShelfWithProduct() {
-		return shelfWithProduct;
+	public List<Shelf> getShelves() {
+		return shelves;
 	}
+
+
 	/**
 	 * @return the discountValue
 	 */
 	public int getDiscountValue() {
 		return discountValue;
 	}
+
+
+	/**
+	 * @param shelves the shelves to set
+	 */
+	public void addShelves(Shelf shelf) {
+		this.shelves.add(shelf);
+	}
+
+
 	/**
 	 * @return the iva
 	 */
@@ -46,12 +65,7 @@ public class Product extends Entity{
 	public int getPvp() {
 		return pvp;
 	}
-	/**
-	 * @param shelfWithProduct the shelfWithProduct to set
-	 */
-	public void setShelfWithProduct(ArrayList <Shelf>  shelfWithProduct) {
-		this.shelfWithProduct = shelfWithProduct;
-	}
+
 	/**
 	 * @param discountValue the discountValue to set
 	 */
@@ -71,15 +85,40 @@ public class Product extends Entity{
 		this.pvp = pvp;
 	}
 	
+	private String printShelves() {
+		String str="";
+		
+		for(int i=0;i<this.shelves.size();i++) {
+			str+=this.shelves.get(i).getId();
+			str+=", ";
+		}
+		return str;
+	}
 	
 	@Override
 	public String toString() {
-		return "Product [shelfWithProduct=" + shelfWithProduct + ", discountValue=" + discountValue + ", iva=" + iva
+		return "Product [shelfWithProduct=" + printShelves() + "discountValue=" + discountValue + ", iva=" + iva
 				+ ", pvp=" + pvp + "]";
 	}
 	
-	
-	
-	
-	
+//	public List<Long> addToShelve(boolean state) {
+//		
+//		while (state == false) {
+//			Long prateleira = sc.nextLong();
+//			List<Long> shelfWithProduct = new ArrayList<Long>();
+//			shelfWithProduct.add(prateleira);
+//			System.out.println("Deseja adicionar o produto a mais prateleiras");
+//			char adicionar = sc.next().charAt(0);
+//			if (adicionar == 's' || adicionar == 'S') {
+//				shelfWithProduct.add(prateleira);
+//			} else {
+//				state = true;
+//
+//				
+//			}
+//			
+//		}
+//	
+//		
+//}
 }
