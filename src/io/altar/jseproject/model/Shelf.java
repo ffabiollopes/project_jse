@@ -1,12 +1,17 @@
 package io.altar.jseproject.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Shelf extends Entity {
-	
+	private List <Product> product;
 	private int capacity;
 	private int productInShelf;
 	private int dailyRentPrice;
+
+
+	
 
 
 	/**
@@ -14,11 +19,24 @@ public class Shelf extends Entity {
 	 * @param productInShelf
 	 * @param dailyRentPrice
 	 */
-	public Shelf(int capacity, int productInShelf, int dailyRentPrice) {
+	public Shelf(int capacity,int dailyRentPrice) {
+		super();
+		this.product = new ArrayList<>();
 		this.capacity = capacity;
-		this.productInShelf = productInShelf;
 		this.dailyRentPrice = dailyRentPrice;
 	}
+
+
+	
+
+	/**
+	 * @return the product
+	 */
+	public List<Product> getProduct() {
+		return product;
+	}
+
+
 
 
 	/**
@@ -29,12 +47,16 @@ public class Shelf extends Entity {
 	}
 
 
+
+
 	/**
 	 * @return the productInShelf
 	 */
 	public int getProductInShelf() {
 		return productInShelf;
 	}
+
+
 
 
 	/**
@@ -45,12 +67,26 @@ public class Shelf extends Entity {
 	}
 
 
+
+
+	/**
+	 * @param product the product to set
+	 */
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
+
+
+
+
 	/**
 	 * @param capacity the capacity to set
 	 */
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+
+
 
 
 	/**
@@ -61,6 +97,8 @@ public class Shelf extends Entity {
 	}
 
 
+
+
 	/**
 	 * @param dailyRentPrice the dailyRentPrice to set
 	 */
@@ -69,9 +107,11 @@ public class Shelf extends Entity {
 	}
 
 
+
+
 	@Override
 	public String toString() {
-		return "Shelf [capacity=" + capacity + ", productInShelf=" + productInShelf + ", dailyRentPrice="
+		return "[Shelf="+getId()+ ", capacity=" + capacity + ", productInShelf=" + productInShelf + ", dailyRentPrice="
 				+ dailyRentPrice + "]";
 	}
 
