@@ -99,13 +99,22 @@ public class TextInterface {
 	// ADICIONAR PRODUTOS
 	public void adicionarProduto() {
 		System.out.println("Criar Novo produto:\n");
-		// colocar um loop a perguntar nova prateleira
 		System.out.println("1 - Prateleira onde quer colocar o produto.");
 		Long id = sc.nextLong();
-		repositorioDeShelfs.findById(id);
-		List <Shelf> prateleira;
-		//mudar isto adiconar ao produto
-		prateleira.addShelves(repositorioDeShelfs);
+		Shelf sitio = repositorioDeShelfs.findById(id);
+		//ADICIONAR MAIS, EU POSSO CRER DAR UM ID ESPECIFICO PARA A PRATELEIRA
+		if (sitio == null) {
+			System.out.println("Não existe");
+			Shelf shelf = new Shelf(100, 0, 0);
+			System.out.println(shelf);
+			repositorioDeShelfs.save(shelf);
+			sitio = repositorioDeShelfs.findById(id);
+			}
+		else {
+			sitio = repositorioDeShelfs.findById(id);
+		}
+		List <Shelf> prateleira = new ArrayList<>();
+		prateleira.add(sitio);
 		System.out.println("2 - Valor unitario de desconto.");
 		int desconto = sc.nextInt();
 		System.out.println("3 - IVA (Imposto de Valor Acrescentado em percentagem)");
@@ -113,34 +122,37 @@ public class TextInterface {
 		System.out.println("4 - PVP (Preco de Venda ao Publico)");
 		int pvp = sc.nextInt();
 		Product produto = new Product(desconto, iva, pvp);
+		produto.addShelves(prateleira);
 		repositorioDeProducts.save(produto);
 		System.out.println(repositorioDeProducts.getAll());
-
 	}
-
+	
 	// MODFICAR PRODUTOS
 	public void alterarProduto() {
 
 		System.out.println("Digite o id do produto a alterar");
 		Long id = sc.nextLong();
 		System.out.println(repositorioDeProducts.findById(id));
-
 		// Prateleira onde esta o produto.
+		//ADICIONAR MAIS, EU POSSO CRER DAR UM ID ESPECIFICO PARA A PRATELEIRA
 		System.out.println("\n 1 - Prateleira onde quer colocar o produto.");
-		System.out.println(repositorioDeProducts.findById((long) id).getShelfWithProduct());
+		System.out.println(repositorioDeProducts.findById((long) id).getShelves());
 		sc.nextLine();
-		System.out.println(
-				"introduza o valor novo ou pressiona enter para eliminar as prateleiras que albergam o produto");
+		System.out.println("introduza o valor novo ou pressiona enter para eliminar as prateleiras que albergam o produto");
 		String prateleiraCheck = sc.nextLine();
 		if (prateleiraCheck.equals("")) {
-			List<Long> shelfWithProduct = new ArrayList<Long>();
-			repositorioDeProducts.findById((long) id).setShelfWithProduct(shelfWithProduct);
+			List <Shelf> prateleira = new ArrayList<>();
+			repositorioDeProducts.findById((long) id).addShelves(prateleira);
 		} else {
-			Long prateleira = Long.parseLong(prateleiraCheck);
-			List<Long> shelfWithProduct = new ArrayList<Long>();
-			shelfWithProduct.add(prateleira);
-			repositorioDeProducts.findById((long) id).setShelfWithProduct(shelfWithProduct);
+			Long novaPrateleira = Long.parseLong(prateleiraCheck);
+			Shelf temp = repositorioDeShelfs.findById(novaPrateleira);
+			List <Shelf> prateleira = new ArrayList<>();
+			prateleira.add(temp);
+			repositorioDeProducts.findById((long) id).addShelves(prateleira);
 		}
+		
+			
+
 
 		// Valor unitario de desconto
 		System.out.println("2 - Valor unitario de desconto.");

@@ -45,11 +45,9 @@ public class Product extends Entity{
 	}
 
 
-	/**
-	 * @param shelves the shelves to set
-	 */
-	public void addShelves(Shelf shelf) {
-		this.shelves.add(shelf);
+	
+	public void addShelves(List<Shelf> shelves) {
+		this.shelves = shelves;
 	}
 
 
@@ -97,28 +95,8 @@ public class Product extends Entity{
 	
 	@Override
 	public String toString() {
-		return "Product [shelfWithProduct=" + printShelves() + "discountValue=" + discountValue + ", iva=" + iva
+		return "Produto:"+getId()+ ", Prateleira=" + printShelves() + "Valor de Desconto=" + discountValue + ", iva=" + iva
 				+ ", pvp=" + pvp + "]";
 	}
 	
-//	public List<Long> addToShelve(boolean state) {
-//		
-//		while (state == false) {
-//			Long prateleira = sc.nextLong();
-//			List<Long> shelfWithProduct = new ArrayList<Long>();
-//			shelfWithProduct.add(prateleira);
-//			System.out.println("Deseja adicionar o produto a mais prateleiras");
-//			char adicionar = sc.next().charAt(0);
-//			if (adicionar == 's' || adicionar == 'S') {
-//				shelfWithProduct.add(prateleira);
-//			} else {
-//				state = true;
-//
-//				
-//			}
-//			
-//		}
-//	
-//		
-//}
 }
