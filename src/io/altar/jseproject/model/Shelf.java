@@ -7,7 +7,6 @@ import java.util.List;
 public class Shelf extends Entity {
 	private List <Product> product;
 	private int capacity;
-	private int productInShelf;
 	private int dailyRentPrice;
 
 
@@ -48,17 +47,6 @@ public class Shelf extends Entity {
 
 
 
-
-	/**
-	 * @return the productInShelf
-	 */
-	public int getProductInShelf() {
-		return productInShelf;
-	}
-
-
-
-
 	/**
 	 * @return the dailyRentPrice
 	 */
@@ -72,7 +60,7 @@ public class Shelf extends Entity {
 	/**
 	 * @param product the product to set
 	 */
-	public void setProduct(List<Product> product) {
+	public void addProduct(List<Product> product) {
 		this.product = product;
 	}
 
@@ -86,19 +74,6 @@ public class Shelf extends Entity {
 		this.capacity = capacity;
 	}
 
-
-
-
-	/**
-	 * @param productInShelf the productInShelf to set
-	 */
-	public void setProductInShelf(int productInShelf) {
-		this.productInShelf = productInShelf;
-	}
-
-
-
-
 	/**
 	 * @param dailyRentPrice the dailyRentPrice to set
 	 */
@@ -111,7 +86,7 @@ public class Shelf extends Entity {
 
 	@Override
 	public String toString() {
-		return "[Shelf="+getId()+ ", capacity=" + capacity + ", productInShelf=" + productInShelf + ", dailyRentPrice="
+		return "[Shelf="+getId()+ ", capacity=" + capacity + ", productInShelf=" + product + ", dailyRentPrice="
 				+ dailyRentPrice + "]";
 	}
 

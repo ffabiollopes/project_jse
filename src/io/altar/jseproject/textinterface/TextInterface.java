@@ -58,6 +58,7 @@ public class TextInterface {
 
 	// MENU PRODUTOS
 	public void menuListarProdutos() {
+		System.out.println(repositorioDeProducts.getAll());
 		System.out.println("Por favor selecione uma das seguintes opcoes:\n");
 		System.out.println("1 - Criar Novo produto.");
 		System.out.println("2 - Editar um produto existente.");
@@ -112,7 +113,7 @@ public class TextInterface {
 			Shelf sitio = repositorioDeShelfs.findById(id);
 			if (sitio == null) {
 				System.out.println("Nao existe");
-				Shelf shelf = new Shelf(100,0);
+				Shelf shelf = new Shelf(100, 0);
 				repositorioDeShelfs.saveMyId(shelf, id);
 				sitio = repositorioDeShelfs.findById(id);
 				prateleira.add(sitio);
@@ -136,7 +137,7 @@ public class TextInterface {
 		Product produto = new Product(desconto, iva, pvp);
 		produto.addShelves(prateleira);
 		repositorioDeProducts.save(produto);
-		System.out.println(repositorioDeProducts.getAll());
+		
 	}
 
 	// MODFICAR PRODUTOS
@@ -226,7 +227,7 @@ public class TextInterface {
 
 	// MENU PRATELEIRAS
 	public void menuListarPrateleiras() {
-
+		System.out.println(repositorioDeShelfs.getAll());
 		System.out.println("Por favor selecione uma das seguintes opcoes:\n");
 		System.out.println("1 - Criar nova prateleira.");
 		System.out.println("2 - Editar uma prateleira existente.");
@@ -264,22 +265,23 @@ public class TextInterface {
 
 	// ADICIONAR PRATELEIRAS
 	public void adicionarPrateleiras() {
-		List<Product> produtoNaPrateleira = new ArrayList<>();
+		List<Product> produtoList = new ArrayList<>();
+		List<Shelf> prateleira = new ArrayList<>();
 		System.out.println("Criar Nova  Prateleira\n");
 		System.out.println("1- Capacidade da Prateleira.");
 		int capacidade = sc.nextInt();
 		System.out.println("2 - Produto que Alberga.");
 		Long id = sc.nextLong();
 		Product produtoParaPrateleira = repositorioDeProducts.findById(id);
-		System.out.println(produtoParaPrateleira);
+		produtoList.add(produtoParaPrateleira);
 		System.out.println("3 - Preco de aluguer de localizacao diario)");
 		int aluguer = sc.nextInt();
 		Shelf shelf = new Shelf(capacidade, aluguer);
+		shelf.addProduct(produtoList);
 		repositorioDeShelfs.save(shelf);
-		produtoNaPrateleira.add(produtoParaPrateleira);
-		System.out.println(shelf.getId());
-//		repositorioDeProducts.findById(id).addShelves(sitio);
-		System.out.println(repositorioDeShelfs.getAll());
+		prateleira.add(shelf);		
+		repositorioDeProducts.findById(id).addShelves(prateleira);
+		
 
 	}
 
@@ -292,7 +294,7 @@ public class TextInterface {
 
 		// CAPACIDADE DA PRATELEIRA
 		System.out.println("\n 1 - Capacidade da Prateleira.");
-		System.out.println(repositorioDeShelfs.findById((long) id).getProductInShelf());
+		System.out.println(repositorioDeShelfs.findById((long) id).getProduct());
 		sc.nextLine();
 		System.out.println("introduza o valor novo ou pressiona enter para manter o Valor");
 		String capacidadeCheck = sc.nextLine();
@@ -305,18 +307,22 @@ public class TextInterface {
 
 		// PRODUTO
 		System.out.println("2 - Produto que Alberga.");
-		System.out.println(repositorioDeShelfs.findById((long) id).getProductInShelf());
+		System.out.println(repositorioDeShelfs.findById((long) id).getProduct());
 
 		System.out.println("introduza o valor novo ou pressiona enter para eliminar a referencia do produto");
 		String produtoCheck = sc.nextLine();
 		if (produtoCheck.equals("")) {
-			int a = -1;
-			repositorioDeShelfs.findById((long) id).setProductInShelf(a);
+			List<Product> produtoList = new ArrayList<>();
+			repositorioDeShelfs.findById((long) id).addProduct(produtoList);
 		} else {
-			int produto = Integer.parseInt(produtoCheck);
-			repositorioDeShelfs.findById((long) id).setProductInShelf(produto);
+			List<Product> produtoList = new ArrayList<>();
+			System.out.println("Novo Produto");
+			Long idProduto = sc.nextLong();
+			Product produtoParaPrateleira = repositorioDeProducts.findById(idProduto);
+			produtoList.add(produtoParaPrateleira);
+			repositorioDeShelfs.findById((long) id).addProduct(produtoList);
 		}
-
+		
 		// ALUGUER
 		System.out.println("3 - Aluguer");
 		System.out.println(repositorioDeShelfs.findById((long) id).getDailyRentPrice());
@@ -334,8 +340,8 @@ public class TextInterface {
 	// CONSULTAR PRATELEIRAS
 	public void consultarPrateleira() {
 		System.out.println("Digite o id da prateleira a consultar:");
-		int id = sc.nextInt();
-		System.out.println(repositorioDeShelfs.findById((long) id));
+		Long id = sc.nextLong();
+		System.out.println(repositorioDeShelfs.findById(id));
 
 	}
 
