@@ -119,6 +119,7 @@ public class TextInterface {
 				prateleira.add(sitio);
 				System.out.println(prateleira);
 			} else {
+				//mudar a logica
 				sitio = repositorioDeShelfs.findById(id);
 				prateleira.add(sitio);
 			}
